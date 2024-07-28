@@ -12,11 +12,14 @@ import time
 logging.basicConfig(level=logging.INFO)
 
 # Absolute path to ChromeDriver
-chromedriver_path = r"D:\PROGRAMING\Web scapper\Python Web Scrapper Project\01 My Github Automation Open\chromedriver.exe"
+chromedriver_path = r"D:\PROGRAMING\Web scapper\Python Web Scrapper Project\01 My Github Automation\chromedriver.exe"
 
 # Check if the ChromeDriver path is valid
 if not os.path.isfile(chromedriver_path):
     raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
+
+# Prompt user for GitHub username
+github_username = input("Enter the GitHub username to search for: ")
 
 try:
     # Initialize the ChromeDriver service
@@ -31,21 +34,27 @@ try:
         EC.presence_of_element_located((By.NAME, "q"))
     )
     search_box.clear()
-    search_box.send_keys("GitHub addygeek" + Keys.ENTER)
-    logging.info("Entered search term and submitted")
+    search_box.send_keys(f"GitHub {github_username}" + Keys.ENTER)
+    logging.info(f"Entered search term 'GitHub {github_username}' and submitted")
 
-    # Wait until the search results are present
+    # Wait until the search results are present and click on the GitHub link
     link = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "addygeek"))
+        EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, github_username))
     )
     link.click()
-    logging.info("Clicked on the 'addygeek GitHub' link")
+    logging.info(f"Clicked on the '{github_username}' GitHub link")
 
-    # Wait for the new page to load completely by ensuring a known element is present
+    # Wait for the new page to load completely
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CLASS_NAME, "vcard-names"))
     )
     logging.info("New page loaded")
+
+    # Scroll down the page
+    # Adjust the scrolling distance as needed
+    for _ in range(5):  # Scroll down 5 times
+        driver.execute_script("window.scrollBy(0, 1000);")
+        time.sleep(2)  # Wait for 2 seconds between scrolls
 
     # Keep the browser open for inspection
     time.sleep(300)  # Wait for 5 minutes (300 seconds)
