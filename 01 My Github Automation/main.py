@@ -12,7 +12,7 @@ import time
 logging.basicConfig(level=logging.INFO)
 
 # Absolute path to ChromeDriver
-chromedriver_path = r"D:\PROGRAMING\Web scapper\Python Web Scrapper Project\01 My Github Automation\chromedriver.exe"
+chromedriver_path = r"D:\PROGRAMING\Web scapper\Python Web Scrapper Project\Chrome Driver\chromedriver.exe"
 
 # Check if the ChromeDriver path is valid
 if not os.path.isfile(chromedriver_path):
