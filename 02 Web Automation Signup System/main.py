@@ -17,3 +17,5 @@ chromedriver_path = r"D:\PROGRAMING\Web scapper\Python Web Scrapper Project\Chro
 # Check if the ChromeDriver path is valid
 if not os.path.isfile(chromedriver_path):
     raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
+
+#Web automation 
