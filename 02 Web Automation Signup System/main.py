@@ -19,7 +19,7 @@ if not os.path.isfile(chromedriver_path):
     raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
 
 #Web automation 
-WebDriverWait(1000)
+WebDriverWait()
 webdriver.Chrome(chromedriver_path)
 driver.get("https://app.applo.io")
 driver.maximize_window()
